@@ -33,11 +33,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Node
-        working-directory: ./meditation-app
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'npm'
+          cache-dependency-path: './meditation-app/package-lock.json'
       - name: Install dependencies
         working-directory: ./meditation-app
         run: npm install
