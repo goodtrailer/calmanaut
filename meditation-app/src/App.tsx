@@ -13,9 +13,9 @@ const App: React.FC = () => {
     <MyRouter>
       <Navbar />
       <Routes>
-        <Route path="" element={<Home />} />
-        <Route path="resources" element={<MeditationResources />} />
-        <Route path="progress" element={<ProgressTracker />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/resources" element={<MeditationResources />} />
+        <Route path="/progress" element={<ProgressTracker />} />
       </Routes>
     </MyRouter>
   );
