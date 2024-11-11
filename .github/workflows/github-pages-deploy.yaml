@@ -32,12 +32,13 @@ jobs:
       - name: Install dependencies
         working-directory: ./meditation-app
         run: npm install
+      - name: Create .env
+        working-directory: ./meditation-app
+        run: printf 'REACT_APP_SERVER=https://calmanaut-server.aldw.net\nREACT_APP_HASH_ROUTER=true' >> .env
       - name: Build
         working-directory: ./meditation-app
         run: npm run build
         env:
-          REACT_APP_SERVER: https://calmanaut-server.aldw.net
-          REACT_APP_HASH_ROUTER: true
           CI: ""
       - name: Setup Pages
         uses: actions/configure-pages@v3
