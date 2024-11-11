@@ -1,3 +1,5 @@
+import "../styles/Login.css";
+
 import { useContext, useEffect, useState } from "react";
 import { AuthorizationContext } from "../context/AuthorizationContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,6 +8,7 @@ import * as Util from "../lib/Util";
 
 export const Signup = (props: any) => {
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const {isLoggedIn} = useContext(AuthorizationContext);
   const navigate = useNavigate();
 
@@ -24,6 +27,7 @@ export const Signup = (props: any) => {
     const confirmPassword = data.get("confirm-password");
 
     setError("");
+    setSuccess("");
 
     if (password !== confirmPassword)
     {
@@ -40,7 +44,7 @@ export const Signup = (props: any) => {
       if (res.status >= 500)
         throw new Error(res.status + ": " + await res.text());
 
-      navigate("/login");
+      setSuccess("Signed up successfully!");
     }).catch(console.error);
   }
 
@@ -49,11 +53,18 @@ export const Signup = (props: any) => {
         {error}
       </div>
     : <></>;
+
+  const successElem = success !== ""
+    ? <div className="success">
+      {success}
+    </div>
+    : <></>;
   
-  return <>
+  return <div className="login">
     <h1>Sign Up</h1>
     {errorElem}
-    <form onSubmit={onSubmit} className="login">
+    {successElem}
+    <form onSubmit={onSubmit}>
       <div>
         <label>Username (8&ndash;16 bytes)</label>
         <input name="username" />
@@ -69,5 +80,5 @@ export const Signup = (props: any) => {
       <button type="submit">Sign Up</button>
     </form>
     <p>Already have an account? <Link to="/login">Log In</Link></p>
-  </>;
+  </div>;
 };

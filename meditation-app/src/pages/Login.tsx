@@ -1,3 +1,5 @@
+import "../styles/Login.css";
+
 import { useContext, useEffect, useState } from "react";
 import * as Util from "../lib/Util"
 import { useNavigate } from "react-router-dom";
@@ -43,10 +45,10 @@ export const Login = (props: any) => {
       </div>
     : <></>;
   
-  return <>
+  return <div className="login">
     <h1>Log In</h1>
     {errorElem}
-    <form onSubmit={onSubmit} className="login">
+    <form onSubmit={onSubmit}>
       <div>
         <label>Username (8&ndash;16 bytes)</label>
         <input name="username" />
@@ -58,5 +60,5 @@ export const Login = (props: any) => {
       <button type="submit">Log In</button>
     </form>
     <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
-  </>;
+  </div>;
 };
