@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as Util from "../lib/Util";
 
@@ -12,19 +12,20 @@ export const ProfileId = (props: any) => {
   const [user, setUser] = useState<User | undefined | false>(undefined);
   const {id} = useParams();
   
-  Util.get("users/" + id, Util.createDateReviver("createDate")).then(res => {
-    setUser(res.user);
-  }).catch(e => {
-    setUser(false);
-    console.error(e);
-  });
-  
-
-  if (user === undefined)
-    return <></>;
+  useEffect(() => {
+    Util.get("users/" + id, Util.createDateReviver("createDate")).then(res => {
+      setUser(res.user);
+    }).catch(e => {
+      setUser(false);
+      console.error(e);
+    });
+  }, [setUser, id]);
 
   if (user === false)
     return <p>User not found.</p>;
+
+  if (user === undefined)
+    return <h1>Profile</h1>;
 
   return <>
     <h1>Profile</h1>
