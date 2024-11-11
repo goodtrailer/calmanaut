@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, HashRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import MeditationResources from './pages/MeditationResources';
 import ProgressTracker from './pages/ProgressTracker';
@@ -10,10 +10,13 @@ import { Logout } from './pages/Logout';
 import { Profile } from './pages/Profile';
 import { Signup } from './pages/Signup';
 import { ProfileId } from './pages/ProfileId';
+import * as Constants from './lib/Constants';
 
 const App: React.FC = () => {
+  const MyRouter = Constants.HASH_ROUTER ? HashRouter : Router;
+
   return (
-    <Router>
+    <MyRouter>
       <AuthorizationProvider>
         <Navbar />
         <Routes>
@@ -29,7 +32,7 @@ const App: React.FC = () => {
           </Route>
         </Routes>
       </AuthorizationProvider>
-    </Router>
+    </MyRouter>
   );
 };
 
