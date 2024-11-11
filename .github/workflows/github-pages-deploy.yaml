@@ -1,6 +1,6 @@
 name: Deploy static content to Pages
 
-on:=
+on:
   push:
     branches: ['github-pages-deploy']
   workflow_dispatch:
